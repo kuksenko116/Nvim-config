@@ -77,10 +77,12 @@ sudo pacman -S --needed fzf ripgrep fd lazygit words wl-clipboard
 For a full Arch/Omarchy setup (packages, symlinks, theme sync) use the
 `omarchy/` directory in the [dotfiles repo](https://github.com/kuksenko116/mis_dot).
 
-On Omarchy the colorscheme follows the active system theme when that
-colorscheme plugin is installed here (tokyonight, catppuccin, ...), and falls
-back to `tokyonight-night`. Disable with `vim.g.omarchy_follow_theme = false`
-in `init.lua` (before `require("lazy").setup`).
+On Omarchy, Neovim follows the system theme the same way Omarchy's own
+LazyVim setup does: it loads the active theme's `neovim.lua`, installs that
+theme's plugin and applies its colorscheme, and switches live when you change
+theme (a theme whose plugin isn't installed yet needs one Neovim restart).
+Elsewhere it uses `tokyonight-night`. Disable with
+`vim.g.omarchy_follow_theme = false` in `init.lua` (before `require("lazy").setup`).
 
 ---
 
