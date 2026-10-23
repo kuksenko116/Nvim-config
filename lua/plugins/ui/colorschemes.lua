@@ -57,7 +57,11 @@ return {
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
-			vim.cmd.colorscheme("tokyonight-night")
+			-- On Omarchy, follow the system theme when its colorscheme is installed
+			local omarchy = require("core.omarchy").colorscheme()
+			if not (omarchy and pcall(vim.cmd.colorscheme, omarchy)) then
+				vim.cmd.colorscheme("tokyonight-night")
+			end
 		end,
 	},
 	{

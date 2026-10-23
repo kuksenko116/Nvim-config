@@ -14,6 +14,14 @@
 -- NOTE: Specify the trigger character(s) used for luasnip
 local trigger_text = ";"
 
+-- Keep only dictionary paths that exist on this machine.
+-- /usr/share/dict/words ships with macOS; on Arch it comes from the `words` package.
+local function existing(paths)
+	return vim.tbl_filter(function(path)
+		return vim.uv.fs_stat(path) ~= nil
+	end, paths)
+end
+
 return {
 	{
 		"saghen/blink.cmp",
@@ -158,12 +166,14 @@ return {
 							--
 							-- Do not specify a file, just the path, and in the path you need to
 							-- have your .txt files
-							dictionary_directories = { vim.fn.expand("~/github/dotfiles-latest/dictionaries") },
+							dictionary_directories = existing({ vim.fn.expand("~/github/dotfiles-latest/dictionaries") }),
 							-- Notice I'm also adding the words I add to the spell dictionary
-							dictionary_files = {
+							dictionary_files = existing({
+								"/usr/share/dict/words",
+								vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
 								vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/en.utf-8.add"),
 								vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/es.utf-8.add"),
-							},
+							}),
 							-- --  NOTE: To disable the definitions uncomment this section below
 							--
 							-- separate_output = function(output)

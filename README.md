@@ -61,17 +61,26 @@
 
 ### Optional Dependencies
 
+**macOS**
+
 ```bash
-# For better search performance
-brew install fzf ripgrep fd
-
-# For clipboard support
-brew install xclip  # Linux
-brew install pbcopy # macOS (built-in)
-
-# For word definitions
-brew install wordnet
+brew install fzf ripgrep fd lazygit wordnet
+# clipboard: pbcopy/pbpaste are built in
 ```
+
+**Arch Linux / Omarchy**
+
+```bash
+sudo pacman -S --needed fzf ripgrep fd lazygit words wl-clipboard
+```
+
+For a full Arch/Omarchy setup (packages, symlinks, theme sync) use the
+`omarchy/` directory in the [dotfiles repo](https://github.com/kuksenko116/mis_dot).
+
+On Omarchy the colorscheme follows the active system theme when that
+colorscheme plugin is installed here (tokyonight, catppuccin, ...), and falls
+back to `tokyonight-night`. Disable with `vim.g.omarchy_follow_theme = false`
+in `init.lua` (before `require("lazy").setup`).
 
 ---
 
